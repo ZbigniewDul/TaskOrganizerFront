@@ -1,0 +1,7 @@
+<h2> Dodawanie nowego pracownika </h2>
+
+<app-display-error [errors]="errors"></app-display-error>
+<app-form-employee 
+(onSaveChanges)="saveChanges($event)"
+[nonSelectedTasks]="nonSelectedTasks"
+></app-form-employee>

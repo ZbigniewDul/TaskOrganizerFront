@@ -1,0 +1,59 @@
+<h2> Zadania </h2>
+
+<button mat-flat-button color="primary" routerLink="/tasks/create"> Dodaj nowe zadanie </button>
+
+<app-generic-list [list]="tasks">
+    <ng-container content>
+        <table mat-table [dataSource]="tasks" class="mat-elevation-z8 table-index">
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Nazwa</th>
+                <td mat-cell *matCellDef="let element">{{element.name}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="dateToFinished">
+                <th mat-header-cell *matHeaderCellDef>Termin wykonania</th>
+                <td mat-cell *matCellDef="let element">{{formatDate(element.dateToFinished)}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="timeLeft">
+                <th mat-header-cell *matHeaderCellDef>Ilość pozostałych dni</th>
+                <td mat-cell *matCellDef="let element">{{element.timeLeft}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Dostępne akcje</th>
+                <td mat-cell *matCellDef="let element">
+                    <a
+                        routerLink="/tasks/edit/{{element.id}}"
+                        mat-flat-button color="primary"
+                    >
+                        Edycja
+                    </a>
+                    <button mat-flat-button color="warn"
+                    [swal]="{
+                        title: 'Potwierdź operację',
+                        text: 'Czy na pewno chcesz usunąć ten rekord?',
+                        showCancelButton: true
+                    }"
+                    (confirm)="delete(element.id)">
+                        Usuń
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+        </table>
+
+        <mat-paginator 
+        [pageSizeOptions]="[5, 10, 15]"
+        showFirstLastButtons
+        [length]="totalAmountOfRecords" [pageSize]="pageSize"
+        (page)="updatePagination($event)"
+        class="table-index">
+
+        </mat-paginator>
+
+    </ng-container>
+</app-generic-list>

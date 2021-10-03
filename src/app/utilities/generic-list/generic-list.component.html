@@ -1,0 +1,12 @@
+<div *ngIf="list?.length === 0" style="margin-top: 1rem;">
+    <span #empty>
+        <ng-content select="[empty]"></ng-content>
+    </span>
+    <span *ngIf="!empty.innerHTML.trim()" style="margin-left: 1.5rem;">
+        Brak rekordów do wyświetlenia
+    </span>
+</div>
+
+<ng-container *ngIf="list && list.length > 0">
+    <ng-content select="[content]"></ng-content>
+</ng-container>

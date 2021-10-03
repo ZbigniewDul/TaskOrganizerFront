@@ -1,0 +1,13 @@
+mat-toolbar{
+    font-size: large;
+    min-height: 60px;
+    background-color: dodgerblue;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+mat-icon{
+    margin-bottom: 0.25rem;
+}

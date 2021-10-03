@@ -1,0 +1,5 @@
+<h2> Edycja Zadania </h2>
+
+<app-form-edit-task *ngIf="model" [model]="model" (onSaveChanges)="saveChanges($event)"></app-form-edit-task>
+
+<mat-spinner *ngIf="!model"></mat-spinner>

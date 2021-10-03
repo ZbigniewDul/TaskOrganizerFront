@@ -1,0 +1,19 @@
+h2{
+    padding-left: 1.5rem;
+    padding-top: 1.5rem;
+    padding-bottom: 0.3rem;
+}
+button{
+    margin-left: 1.5rem;
+}
+.table-index{
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+    width: 80%;
+}
+a{
+    margin-right: 1rem;
+}
+.mat-column-actions{
+    width: 30%;
+}

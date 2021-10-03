@@ -1,0 +1,22 @@
+<form (submit)="saveChanges()" [formGroup]="form">
+    <mat-form-field appearance="outline">
+        <mat-label>*Nazwa</mat-label>
+        <input formControlName="name" matInput/>
+        <mat-error *ngIf="form.invalid">{{getErrorMessageFieldName()}}</mat-error>
+    </mat-form-field>
+
+    <h4> Wybierz zadania do zrobienia </h4>
+
+    <div>
+        <app-multiple-selector
+        [NonSelectedItems]="nonSelectedTasks" 
+        [SelectedItems]="selectedTasks"
+        ></app-multiple-selector>
+    </div>
+
+    <div>
+        <button mat-raised-button color="primary" [disabled]="form.invalid"> Zapisz pracownika </button>
+        <a mat-raised-button color="warn" routerLink="/employees"> Anuluj </a>
+    </div>
+
+</form>

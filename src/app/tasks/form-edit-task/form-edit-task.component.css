@@ -1,0 +1,18 @@
+form{
+    width: 500px;
+}
+mat-form-field{
+    margin-left: 1.5rem;
+    width: 100%;
+}
+.buttons{
+    margin-left: 1.5rem;
+}
+button{
+    margin-top: 0.5rem;
+    margin-right: 2rem;
+}
+.checkbox-container{
+    margin-bottom: 1rem;
+    margin-left: 1.5rem;
+}

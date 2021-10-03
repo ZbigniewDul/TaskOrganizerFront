@@ -1,0 +1,33 @@
+<form (submit)="saveChanges()" [formGroup]="form">
+    <mat-form-field appearance="outline">
+        <mat-label>*Nazwa</mat-label>
+        <input formControlName="name" matInput/>
+        <mat-error *ngIf="form.invalid">{{getErrorMessageFieldName()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>*Data do kiedy</mat-label>
+        <input formControlName="dateToFinished" matInput [min]="minDate" [matDatepicker]="picker"/>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.invalid">{{getErrorMessageFieldDateToFinished()}}</mat-error>
+    </mat-form-field>
+
+    <div class="checkbox-container">
+        <mat-checkbox formControlName="isCompleted">Ukończone</mat-checkbox>
+    </div>
+
+    <div>
+        <app-input-markdown
+        [markdownContent]="model?.description"
+        [label]="'Opis'"
+        (changeMarkDown)="onChangesMarkdown($event)"></app-input-markdown>
+        <mat-error style="margin-left: 1.5rem;" *ngIf="form.invalid">{{getErrorMessageFieldDescription()}}</mat-error>
+    </div>
+    
+
+    <div class="buttons">
+        <button mat-raised-button color="primary" [disabled]="form.invalid"> Zapisz </button>
+        <a mat-raised-button color="warn" routerLink="/tasks"> Anuluj </a>
+    </div>
+</form>
