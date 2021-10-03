@@ -1,0 +1,9 @@
+h2{
+    padding: 1.5rem;
+}
+
+mat-spinner{
+    position: fixed;
+    top: 50%;
+    left: 30%;
+}

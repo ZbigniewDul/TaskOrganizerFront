@@ -14,3 +14,9 @@ export interface employeeDTO{
 export interface PostGetDTO{
     tasks: taskDTO[];
 }
+
+export interface PutGetDTO{
+    employee: employeeDTO;
+    selectedTasks: taskDTO[];
+    nonSelectedTasks: taskDTO[];
+}

@@ -2,7 +2,6 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
-import { formatDateFormData } from 'src/app/utilities/utilis';
 import { taskDTO } from '../tasks.model';
 import { TasksService } from '../tasks.service';
 

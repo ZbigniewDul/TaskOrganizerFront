@@ -1,1 +1,11 @@
-<p>edit-employee works!</p>
+<h2> Edycja pracownika </h2>
+
+<app-form-employee
+[model]="model" 
+[nonSelectedTasks]="nonSelectedTasks"
+[selectedTasks]="selectedTasks"
+*ngIf="model" 
+(onSaveChanges)="saveChanges($event)"
+></app-form-employee>
+
+<mat-spinner *ngIf="!model"></mat-spinner>

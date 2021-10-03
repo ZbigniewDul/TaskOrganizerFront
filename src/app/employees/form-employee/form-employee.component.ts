@@ -31,6 +31,10 @@ export class FormEmployeeComponent implements OnInit {
       }],
       taskIds: ''
     });
+
+    if(this.model !== undefined){
+      this.form.patchValue(this.model);
+    }
   }
 
   saveChanges(){
