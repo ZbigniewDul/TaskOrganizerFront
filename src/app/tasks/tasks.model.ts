@@ -10,6 +10,7 @@ export interface taskDTO{
     dateToFinished: Date;
     timeLeft: number;
     description: string;
+    taskStatus: number;
     isCompleted: boolean;
     personAttached: string;
     employeeId: number;

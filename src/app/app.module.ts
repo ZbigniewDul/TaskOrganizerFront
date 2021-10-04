@@ -24,6 +24,8 @@ import { InputMarkdownComponent } from './utilities/input-markdown/input-markdow
 import { DisplayErrorComponent } from './utilities/display-error/display-error.component';
 import { FormEditTaskComponent } from './tasks/form-edit-task/form-edit-task.component';
 import { MultipleSelectorComponent } from './utilities/multiple-selector/multiple-selector.component';
+import { HomeComponent } from './home/home/home.component';
+import { TableTasksComponent } from './tasks/table-tasks/table-tasks.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { MultipleSelectorComponent } from './utilities/multiple-selector/multipl
     InputMarkdownComponent,
     DisplayErrorComponent,
     FormEditTaskComponent,
-    MultipleSelectorComponent
+    MultipleSelectorComponent,
+    HomeComponent,
+    TableTasksComponent
   ],
   imports: [
     BrowserModule,

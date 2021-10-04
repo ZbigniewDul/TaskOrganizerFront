@@ -34,6 +34,10 @@ export class TasksService {
     return this.http.put(`${this.apiURL}/${id}`, task);
   }
 
+  editStatus(id: number, task: taskDTO){
+    return this.http.put(`${this.apiURL}/putStatus/${id}`, task);
+  }
+
   delete(id: number){
     return this.http.delete(`${this.apiURL}/${id}`);
   }

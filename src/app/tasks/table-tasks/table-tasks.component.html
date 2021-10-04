@@ -1,0 +1,125 @@
+<div class="container">
+
+    <div class="column">
+        <app-generic-list [list]="tasksNotInProgress">
+            <ng-container content>
+                <table mat-table [dataSource]="tasksNotInProgress" class="mat-elevation-z8 table-index">
+                    <ng-container matColumnDef="tasksNotInProgress">
+                        <th mat-header-cell *matHeaderCellDef> Zadania nierealizowane </th>
+                        <td mat-cell *matCellDef="let element">
+                            <pre>Zadanie: <a routerLink="/tasks/edit/{{element.id}}">{{element.name}}</a></pre>
+                            <pre>Odpowiedzialny: <a routerLink="/employees/edit/{{element.employeeId}}">{{element.personAttached}}</a></pre> 
+                            <pre>Pozostały czas: {{element.timeLeft}}</pre>
+                        </td>
+        
+                        <ng-container matColumnDef="putToInProgress">
+                            <th mat-header-cell *matHeaderCellDef></th>
+                            <td mat-cell *matCellDef="let element">
+                                <button
+                                mat-raised-button 
+                                color="primary"
+                                [swal]="{
+                                    title: 'Potwierdź',
+                                    text: 'Czy na pewno chcesz przenieść zadanie do kolumny w trakcie realizacji?',
+                                    showCancelButton: true
+                                }"
+                                (confirm)="putToInProgress(element.id, element)"
+                                > Realizuj </button>
+                            </td>
+                        </ng-container>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplayNotInProgress"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columnsToDisplayNotInProgress"></tr>
+                </table>
+            </ng-container>
+        </app-generic-list>
+    </div>
+
+    <div class="column">
+        <app-generic-list [list]="tasksInProgress">
+            <ng-container content>
+                <table mat-table [dataSource]="tasksInProgress" class="mat-elevation-z8 table-index">
+        
+                    <ng-container matColumnDef="tasksInProgress">
+                        <th mat-header-cell *matHeaderCellDef> Zadania w trakcie realizacji </th>
+                        <td mat-cell *matCellDef="let element">
+                            <pre>Zadanie: <a routerLink="/tasks/edit/{{element.id}}">{{element.name}}</a></pre>
+                            <pre>Odpowiedzialny: <a routerLink="/employees/edit/{{element.employeeId}}">{{element.personAttached}}</a></pre> 
+                            <pre>Pozostały czas: {{element.timeLeft}}</pre>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let element">
+                            <button 
+                            mat-raised-button 
+                            color="primary"
+                            [swal]="{
+                                title: 'Potwierdź',
+                                text: 'Czy na pewno chcesz przenieść zadanie do kolumny nieralizowane?',
+                                showCancelButton: true
+                            }"
+                            (confirm)="putToNotInProgress(element.id, element)">
+                                Nierealizowane
+                            </button>
+                            <button 
+                            mat-raised-button 
+                            color="primary"
+                            [swal]="{
+                                title: 'Potwierdź',
+                                text: 'Czy na pewno chcesz przenieść zadanie do kolumny ukończone?',
+                                showCancelButton: true
+                            }"
+                            (confirm)="putToCompleted(element.id, element)">
+                                Ukończone
+                            </button>
+                        </td>
+                    </ng-container>
+        
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplayInProgress"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columnsToDisplayInProgress"></tr>
+                </table>
+            </ng-container>
+        </app-generic-list>
+    </div>
+
+    <div class="column">
+        <app-generic-list [list]="tasksCompleted">
+            <ng-container content>
+                <table mat-table [dataSource]="tasksCompleted" class="mat-elevation-z8 table-index">
+        
+                    <ng-container matColumnDef="tasksCompleted">
+                        <th mat-header-cell *matHeaderCellDef> Zadania zrealizowane </th>
+                        <td mat-cell *matCellDef="let element">
+                            <pre>Zadanie: <a routerLink="/tasks/edit/{{element.id}}">{{element.name}}</a></pre>
+                            <pre>Odpowiedzialny: <a routerLink="/employees/edit/{{element.employeeId}}">{{element.personAttached}}</a></pre> 
+                            <pre>Pozostały czas: {{element.timeLeft}}</pre>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="delete">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let element">
+                            <button 
+                            mat-raised-button 
+                            color="warn"
+                            [swal]="{
+                                title: 'Potwierdź',
+                                text: 'Czy na pewno chcesz usunąć zadanie?',
+                                showCancelButton: true
+                            }"
+                            (confirm)="deleteTask(element.id)">
+                                Usuń
+                            </button>
+                        </td>
+                    </ng-container>
+        
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplayCompleted"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columnsToDisplayCompleted"></tr>
+                </table>
+            </ng-container>
+        </app-generic-list>
+    </div>
+
+</div>
