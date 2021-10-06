@@ -1,0 +1,20 @@
+<h3>{{action}}</h3>
+
+<form (submit)="onSubmit.emit(form.value)" [formGroup]="form">
+    <mat-form-field appearance="outline">
+        <mat-label>*nazwa</mat-label>
+        <input formControlName="name" matInput/>
+        <mat-error> Pole nazwa jest wymagana </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>*hasło</mat-label>
+        <input type="password" formControlName="password" matInput/>
+        <mat-error> Pole hasło jest wymagane </mat-error>
+    </mat-form-field>
+
+    <div>
+        <button mat-raised-button color="primary" [disabled]="form.invalid">{{action}}</button>
+        <a mat-raised-button routerLink="/" color="warn"> Anuluj </a>
+    </div>
+</form>

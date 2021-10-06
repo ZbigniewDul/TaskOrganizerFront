@@ -1,0 +1,50 @@
+<h2> Użytkownicy </h2>
+
+<app-generic-list [list]="users">
+    <ng-container content>
+        <table mat-table [dataSource]="users" class="mat-elevation-z8 table-index">
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Dostępne akcje</th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-flat-button color="warn"
+                    [swal]="{
+                        title: 'Potwierdź operację',
+                        text: 'Czy na pewno chcesz nadać dodatkowe uprawnienia użytkownikowi?',
+                        showCancelButton: true
+                    }"
+                    (confirm)="makeModerator(element.id)">
+                        Daj uprawnienia
+                    </button>
+                    <button mat-flat-button color="warn"
+                    [swal]="{
+                        title: 'Potwierdź operację',
+                        text: 'Czy na pewno chcesz cofnąć dodatkowe uprawnienia użytkownikowi?',
+                        showCancelButton: true
+                    }"
+                    (confirm)="removeModerator(element.id)">
+                        Cofnij uprawnienia
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+
+        </table>
+
+        <mat-paginator 
+        [pageSizeOptions]="[5, 10, 15]"
+        showFirstLastButtons
+        [length]="totalAmountOfRecords" [pageSize]="pageSize"
+        (page)="updatePagination($event)"
+        class="table-index">
+        </mat-paginator>
+
+    </ng-container>
+</app-generic-list>

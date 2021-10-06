@@ -11,3 +11,6 @@ mat-toolbar{
 mat-icon{
     margin-bottom: 0.25rem;
 }
+.space{
+    flex: 1 1 auto;
+}

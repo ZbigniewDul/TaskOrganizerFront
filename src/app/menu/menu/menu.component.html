@@ -4,12 +4,39 @@
         <a routerLink="" mat-button><mat-icon>home</mat-icon> Strona Główna </a>
     </span>
 
-    <span>
-        <a routerLink="tasks" mat-button><mat-icon>task</mat-icon> Zarządzaj Zadaniami </a>
-    </span>
+    <app-authorize-view [role]="'moderator'">
+        <ng-container authorized>
+            <span>
+                <a routerLink="tasks" mat-button><mat-icon>task</mat-icon> Zarządzaj Zadaniami </a>
+            </span>
+            
+            <span>
+                <a routerLink="employees" mat-button><mat-icon>badge</mat-icon> Zarządzaj Pracownikami </a>
+            </span>
+        </ng-container>
+    </app-authorize-view>
 
-    <span>
-        <a routerLink="employees" mat-button><mat-icon>badge</mat-icon> Zarządzaj Pracownikami </a>
-    </span>
+    <app-authorize-view [role]="'admin'">
+        <ng-container authorized>
+            <span>
+                <a routerLink="users" mat-button><mat-icon>admin_panel_settings</mat-icon> Zarządzaj uprawnieniami </a>
+            </span>
+        </ng-container>
+    </app-authorize-view>
+
+    <div class="space"></div>
+
+    <app-authorize-view>
+        <ng-container authorized>
+            <span>Witaj {{securityService.getFieldFromJWT('name')}}</span>
+            <a mat-button (click)="securityService.logout()"> Wyloguj </a>
+        </ng-container>
+    </app-authorize-view>
+    <app-authorize-view>
+        <ng-container notAuthorized>
+            <a mat-button routerLink="login"> Zaloguj </a>
+            <a mat-button routerLink="register"> Rejestracja </a>
+        </ng-container>
+    </app-authorize-view>
 
 </mat-toolbar>

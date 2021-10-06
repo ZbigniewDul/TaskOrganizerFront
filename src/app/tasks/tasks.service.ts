@@ -2,7 +2,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { taskCreationDTO, taskDTO } from './tasks.model';
-import { formatDateFormData } from '../utilities/utilis'
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -42,14 +41,4 @@ export class TasksService {
     return this.http.delete(`${this.apiURL}/${id}`);
   }
 
-
-  private buildFormData(task: taskCreationDTO): FormData{
-    const formData = new FormData();
-
-    formData.append('name', task.name);
-    formData.append('dateToFinished', formatDateFormData(task.dateToFinished));
-    formData.append('description', task.description);
-
-    return formData;
-  }
 }

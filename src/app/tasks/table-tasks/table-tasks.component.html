@@ -4,6 +4,7 @@
         <app-generic-list [list]="tasksNotInProgress">
             <ng-container content>
                 <table mat-table [dataSource]="tasksNotInProgress" class="mat-elevation-z8 table-index">
+
                     <ng-container matColumnDef="tasksNotInProgress">
                         <th mat-header-cell *matHeaderCellDef> Zadania nierealizowane </th>
                         <td mat-cell *matCellDef="let element">
@@ -11,25 +12,31 @@
                             <pre>Odpowiedzialny: <a routerLink="/employees/edit/{{element.employeeId}}">{{element.personAttached}}</a></pre> 
                             <pre>Pozostały czas: {{element.timeLeft}}</pre>
                         </td>
-        
-                        <ng-container matColumnDef="putToInProgress">
-                            <th mat-header-cell *matHeaderCellDef></th>
-                            <td mat-cell *matCellDef="let element">
-                                <button
-                                mat-raised-button 
-                                color="primary"
-                                [swal]="{
-                                    title: 'Potwierdź',
-                                    text: 'Czy na pewno chcesz przenieść zadanie do kolumny w trakcie realizacji?',
-                                    showCancelButton: true
-                                }"
-                                (confirm)="putToInProgress(element.id, element)"
-                                > Realizuj </button>
-                            </td>
-                        </ng-container>
+
+                            <ng-container matColumnDef="putToInProgress">
+                                <th mat-header-cell *matHeaderCellDef></th>
+                                <td mat-cell *matCellDef="let element">
+                                    <app-authorize-view [role]="'moderator'">
+                                        <ng-container authorized>
+                                            <button
+                                            mat-raised-button 
+                                            color="primary"
+                                            [swal]="{
+                                                title: 'Potwierdź',
+                                                text: 'Czy na pewno chcesz przenieść zadanie do kolumny w trakcie realizacji?',
+                                                showCancelButton: true
+                                            }"
+                                            (confirm)="putToInProgress(element.id, element)"
+                                            > Realizuj </button>
+                                        </ng-container>
+                                    </app-authorize-view>
+                                </td>
+                            </ng-container>
                     </ng-container>
+
                     <tr mat-header-row *matHeaderRowDef="columnsToDisplayNotInProgress"></tr>
                     <tr mat-row *matRowDef="let row; columns: columnsToDisplayNotInProgress"></tr>
+
                 </table>
             </ng-container>
         </app-generic-list>
@@ -52,28 +59,32 @@
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef></th>
                         <td mat-cell *matCellDef="let element">
-                            <button 
-                            mat-raised-button 
-                            color="primary"
-                            [swal]="{
-                                title: 'Potwierdź',
-                                text: 'Czy na pewno chcesz przenieść zadanie do kolumny nieralizowane?',
-                                showCancelButton: true
-                            }"
-                            (confirm)="putToNotInProgress(element.id, element)">
-                                Nierealizowane
-                            </button>
-                            <button 
-                            mat-raised-button 
-                            color="primary"
-                            [swal]="{
-                                title: 'Potwierdź',
-                                text: 'Czy na pewno chcesz przenieść zadanie do kolumny ukończone?',
-                                showCancelButton: true
-                            }"
-                            (confirm)="putToCompleted(element.id, element)">
-                                Ukończone
-                            </button>
+                            <app-authorize-view [role]="'moderator'">
+                                <ng-container authorized>
+                                    <button 
+                                    mat-raised-button 
+                                    color="primary"
+                                    [swal]="{
+                                        title: 'Potwierdź',
+                                        text: 'Czy na pewno chcesz przenieść zadanie do kolumny nieralizowane?',
+                                        showCancelButton: true
+                                    }"
+                                    (confirm)="putToNotInProgress(element.id, element)">
+                                        Nierealizowane
+                                    </button>
+                                    <button 
+                                    mat-raised-button 
+                                    color="primary"
+                                    [swal]="{
+                                        title: 'Potwierdź',
+                                        text: 'Czy na pewno chcesz przenieść zadanie do kolumny ukończone?',
+                                        showCancelButton: true
+                                    }"
+                                    (confirm)="putToCompleted(element.id, element)">
+                                        Ukończone
+                                    </button>
+                                </ng-container>
+                            </app-authorize-view>
                         </td>
                     </ng-container>
         
@@ -101,17 +112,21 @@
                     <ng-container matColumnDef="delete">
                         <th mat-header-cell *matHeaderCellDef></th>
                         <td mat-cell *matCellDef="let element">
-                            <button 
-                            mat-raised-button 
-                            color="warn"
-                            [swal]="{
-                                title: 'Potwierdź',
-                                text: 'Czy na pewno chcesz usunąć zadanie?',
-                                showCancelButton: true
-                            }"
-                            (confirm)="deleteTask(element.id)">
-                                Usuń
-                            </button>
+                            <app-authorize-view [role]="'moderator'">
+                                <ng-container authorized>
+                                    <button 
+                                    mat-raised-button 
+                                    color="warn"
+                                    [swal]="{
+                                        title: 'Potwierdź',
+                                        text: 'Czy na pewno chcesz usunąć zadanie?',
+                                        showCancelButton: true
+                                    }"
+                                    (confirm)="deleteTask(element.id)">
+                                        Usuń
+                                    </button>
+                                </ng-container>
+                            </app-authorize-view>
                         </td>
                     </ng-container>
         

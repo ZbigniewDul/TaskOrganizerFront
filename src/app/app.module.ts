@@ -8,7 +8,7 @@ import { MaterialModule } from './material/material.module';
 import { MarkdownModule } from 'ngx-markdown';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
 
 import { CreateTaskComponent } from './tasks/create-task/create-task.component';
 import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
@@ -26,6 +26,12 @@ import { FormEditTaskComponent } from './tasks/form-edit-task/form-edit-task.com
 import { MultipleSelectorComponent } from './utilities/multiple-selector/multiple-selector.component';
 import { HomeComponent } from './home/home/home.component';
 import { TableTasksComponent } from './tasks/table-tasks/table-tasks.component';
+import { AuthorizeViewComponent } from './security/authorize-view/authorize-view.component';
+import { LoginComponent } from './security/login/login.component';
+import { RegisterComponent } from './security/register/register.component';
+import { AuthenticationFormComponent } from './security/authentication-form/authentication-form.component';
+import { IndexUsersComponent } from './security/index-users/index-users.component';
+import { JwtInterceptorService } from './security/jwt-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +51,12 @@ import { TableTasksComponent } from './tasks/table-tasks/table-tasks.component';
     FormEditTaskComponent,
     MultipleSelectorComponent,
     HomeComponent,
-    TableTasksComponent
+    TableTasksComponent,
+    AuthorizeViewComponent,
+    LoginComponent,
+    RegisterComponent,
+    AuthenticationFormComponent,
+    IndexUsersComponent
   ],
   imports: [
     BrowserModule,
@@ -58,9 +69,11 @@ import { TableTasksComponent } from './tasks/table-tasks/table-tasks.component';
     MarkdownModule.forRoot(),
     SweetAlert2Module.forRoot()
   ],
-  providers: [
-    Title
-  ],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: JwtInterceptorService,
+    multi: true
+  }, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
