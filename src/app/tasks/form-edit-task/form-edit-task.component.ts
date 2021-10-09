@@ -29,6 +29,8 @@ export class FormEditTaskComponent implements OnInit {
       isCompleted: false
     });
 
+    console.log(this.model);
+
     if(this.model !== undefined){
       this.form.patchValue(this.model);
     }

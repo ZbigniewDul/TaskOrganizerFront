@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SecurityService } from 'src/app/security/security.service';
 import { taskDTO } from '../tasks.model';
 import { TasksService } from '../tasks.service';
 
@@ -12,6 +13,7 @@ export class EditTaskComponent implements OnInit {
 
   constructor(private tasksService: TasksService,
     private activatedRoute: ActivatedRoute,
+    private securityService: SecurityService,
     private router: Router) { }
 
   model!: taskDTO;
@@ -25,6 +27,8 @@ export class EditTaskComponent implements OnInit {
   }
 
   saveChanges(taskDTO: taskDTO){
+    const name = this.securityService.getFieldFromJWT('name');
+    taskDTO.userName = name;
     this.tasksService.edit(this.model.id, taskDTO).subscribe(() =>{
       this.router.navigate(["/tasks"])
     });

@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { SecurityService } from '../security/security.service';
 import { taskDTO } from '../tasks/tasks.model';
 
 @Injectable({
@@ -9,19 +10,25 @@ import { taskDTO } from '../tasks/tasks.model';
 })
 export class HomeService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private securityService: SecurityService) { }
 
   private apiURL = environment.apiURL + '/';
 
   getNotInProgress(): Observable<taskDTO[]>{
-    return this.http.get<taskDTO[]>(this.apiURL);
+    let params = new HttpParams();
+    params = params.append('name', this.securityService.getFieldFromJWT('name'))
+    return this.http.get<taskDTO[]>(this.apiURL, {params});
   }
 
   getInProgress(): Observable<taskDTO[]>{
-    return this.http.get<taskDTO[]>(`${this.apiURL}inProgress`);
+    let params = new HttpParams();
+    params = params.append('name', this.securityService.getFieldFromJWT('name'))
+    return this.http.get<taskDTO[]>(`${this.apiURL}inProgress`, {params});
   }
 
   getCompleted(): Observable<taskDTO[]>{
-    return this.http.get<taskDTO[]>(`${this.apiURL}completed`);
+    let params = new HttpParams();
+    params = params.append('name', this.securityService.getFieldFromJWT('name'))
+    return this.http.get<taskDTO[]>(`${this.apiURL}completed`, {params});
   }
 }

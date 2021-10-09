@@ -32,14 +32,14 @@ export class IndexUsersComponent implements OnInit {
     });
   }
 
-  makeModerator(id: string){
-    this.securityService.makeModerator(id).subscribe(() =>{
+  makeModerator(name: string){
+    this.securityService.makeModerator(name).subscribe(() =>{
       this.loadUsers();
     })
   }
 
-  removeModerator(id: string){
-    this.securityService.removeModerator(id).subscribe(() =>{
+  removeModerator(name: string){
+    this.securityService.removeModerator(name).subscribe(() =>{
       this.loadUsers();
     })
   }

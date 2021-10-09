@@ -18,7 +18,7 @@
                         text: 'Czy na pewno chcesz nadać dodatkowe uprawnienia użytkownikowi?',
                         showCancelButton: true
                     }"
-                    (confirm)="makeModerator(element.id)">
+                    (confirm)="makeModerator(element.name)">
                         Daj uprawnienia
                     </button>
                     <button mat-flat-button color="warn"
@@ -27,7 +27,7 @@
                         text: 'Czy na pewno chcesz cofnąć dodatkowe uprawnienia użytkownikowi?',
                         showCancelButton: true
                     }"
-                    (confirm)="removeModerator(element.id)">
+                    (confirm)="removeModerator(element.name)">
                         Cofnij uprawnienia
                     </button>
                 </td>

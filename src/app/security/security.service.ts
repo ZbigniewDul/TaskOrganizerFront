@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { authenticationResponse, userCredentials, userDTO } from './security.models';
@@ -9,7 +10,7 @@ import { authenticationResponse, userCredentials, userDTO } from './security.mod
 })
 export class SecurityService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   private apiURL = environment.apiURL + "/accounts";
   private readonly tokenKey: string = 'token';
@@ -17,15 +18,21 @@ export class SecurityService {
   private readonly roleField = 'role';
 
   getUsers(page: number, recordsPerPage): Observable<any>{
+    const token = this.getFieldFromJWT('name')
     let params = new HttpParams();
     params = params.append('page', page.toString());
     params = params.append('recordsPerPage', recordsPerPage.toString());
+    params = params.append('name', token);
     return this.http.get<userDTO[]>(`${this.apiURL}/listusers`, {observe: 'response', params});
   }
 
-  makeModerator(userId: string){
+  getPut(){
+    
+  }
+
+  makeModerator(name: string){
     const headers = new HttpHeaders('Content-Type: application/json');
-    return this.http.post(`${this.apiURL}/makemoderator`, JSON.stringify(userId), {headers});
+    return this.http.post(`${this.apiURL}/makemoderator`, JSON.stringify(name), {headers});
   }
 
   removeModerator(userId: string){
@@ -64,6 +71,7 @@ export class SecurityService {
   logout(){
     localStorage.removeItem(this.tokenKey);
     localStorage.removeItem(this.expirationTokenKey);
+    this.router.navigate(['/login']);
   }
 
   getRole(): string{

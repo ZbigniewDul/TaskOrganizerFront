@@ -2,6 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
+import { SecurityService } from 'src/app/security/security.service';
 import { taskDTO } from '../tasks.model';
 import { TasksService } from '../tasks.service';
 
@@ -13,6 +14,7 @@ import { TasksService } from '../tasks.service';
 export class IndexTaskComponent implements OnInit {
 
   constructor(private tasksService: TasksService,
+    private securityService: SecurityService,
     private router: Router) { }
 
   tasks: taskDTO[];

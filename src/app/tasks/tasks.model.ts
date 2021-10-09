@@ -2,6 +2,7 @@ export interface taskCreationDTO{
     name: string;
     dateToFinished: Date;
     description: string;
+    userName: string;
 }
 
 export interface taskDTO{
@@ -14,4 +15,5 @@ export interface taskDTO{
     isCompleted: boolean;
     personAttached: string;
     employeeId: number;
+    userName: string;
 }

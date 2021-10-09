@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SecurityService } from 'src/app/security/security.service';
 import { multipleSelectorModel } from 'src/app/utilities/multiple-selector/multiple-selector.model';
 import { employeeCreationDTO, employeeDTO } from '../employees.model';
 import { EmployeesService } from '../employees.service';
@@ -12,6 +13,7 @@ import { EmployeesService } from '../employees.service';
 export class EditEmployeeComponent implements OnInit {
 
   constructor(private employeesService: EmployeesService,
+    private securityService: SecurityService,
     private activatedRoute: ActivatedRoute,
     private router: Router) { }
 
@@ -36,6 +38,8 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   saveChanges(employeeCreationDTO: employeeCreationDTO){
+    const userName = this.securityService.getFieldFromJWT('name');
+    employeeCreationDTO.userName = userName;
     this.employeesService.edit(employeeCreationDTO, this.model.id).subscribe(() =>{
       this.router.navigate(['/employees']);
     });
