@@ -7,6 +7,8 @@ Application has been published by using Firebase and Azure.
 
 # Published
 
+URL address: https://tasksorganizer251.web.app/
+
 - Frontend - Firebase from Google,
 - Backend - Azure from Microsoft,
 - Database - SQL Database Azure
