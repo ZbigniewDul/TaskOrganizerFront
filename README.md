@@ -1,6 +1,6 @@
 # Task organizer made by Zbigniew Dul
 
-CRM application which primary goal is to manage employees and assign them tasks. The FrontEnd of the Application has been done in Angular, the BackEnd in C# REST API .Net 5.
+ERP application which primary goal is to manage employees and assign them tasks. The FrontEnd of the Application has been done in Angular, the BackEnd in C# REST API .Net 5.
 Application has been published by using Firebase and Azure. 
 
 ![HomeView](https://user-images.githubusercontent.com/79752413/136762186-10355bcb-d9f8-4e79-b3c3-e690c31df87d.png)
