@@ -1,6 +1,6 @@
 # Task organizer made by Zbigniew Dul
 
-CRM application which primary goal is to management employees and assign them tasks. The FrontEnd of the Application was done in Angular, the BackEnd in C# REST API .Net 5.
+CRM application which primary goal is to manage employees and assign them tasks. The FrontEnd of the Application has been done in Angular, the BackEnd in C# REST API .Net 5.
 Application has been published by using Firebase and Azure. 
 
 ![HomeView](https://user-images.githubusercontent.com/79752413/136762186-10355bcb-d9f8-4e79-b3c3-e690c31df87d.png)
@@ -21,7 +21,7 @@ If you'd like to test the application, you can use existing accounts or create a
 - Click on "Zarządzanie Uprawnieniami" button and add claim to your account
 ![AdminView](https://user-images.githubusercontent.com/79752413/136766355-b3a074c5-d0d3-4a36-8c14-73f024cf2bc2.png)
 
-- Logout and login to account created by yourself
+- Logout and login to account that you have just created
 
 - To use existing account you have to login by using these (Jane Smith/Jane Doe/ John Smith/ Joe Doe and password is !aA123456)
 
