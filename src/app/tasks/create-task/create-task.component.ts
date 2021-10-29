@@ -26,6 +26,7 @@ export class CreateTaskComponent implements OnInit {
     const userName = this.securityService.getFieldFromJWT('name');
     taskCreationDTO.userName = userName;
     this.tasksService.create(taskCreationDTO).subscribe(() =>{
+      console.log(taskCreationDTO);
       this.router.navigate(['/tasks']);
     });
   }

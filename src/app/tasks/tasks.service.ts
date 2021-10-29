@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { taskCreationDTO, taskDTO } from './tasks.model';
 import { Observable } from 'rxjs';
 import { SecurityService } from '../security/security.service';
+import { formatDateFormData } from '../utilities/utilis';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class TasksService {
   }
 
   create(task: taskCreationDTO){
-    return this.http.post(this.apiURL, task);
+    const formData = this.buildFormData(task);
+    return this.http.post(this.apiURL, formData);
   }
 
   getById(id: number): Observable<taskDTO>{
@@ -32,7 +34,8 @@ export class TasksService {
   }
 
   edit(id: number, task: taskDTO){
-    return this.http.put(`${this.apiURL}/${id}`, task);
+    const formData = this.buildFormDataWhenUpdate(task);
+    return this.http.put(`${this.apiURL}/${id}`, formData);
   }
 
   editStatus(id: number, task: taskDTO){
@@ -42,6 +45,45 @@ export class TasksService {
 
   delete(id: number){
     return this.http.delete(`${this.apiURL}/${id}`);
+  }
+
+  private buildFormData(task: taskCreationDTO): FormData{
+    const formData = new FormData();
+
+    formData.append('name', task.name);
+
+    if(task.description){
+      formData.append('description', task.description);
+    }
+
+    if(task.dateToFinished){
+      formData.append('dateToFinished', formatDateFormData(task.dateToFinished));
+    }
+
+    if(task.userName){
+      formData.append('userName', task.userName);
+    }
+
+    return formData;
+  }
+  private buildFormDataWhenUpdate(task: taskDTO): FormData{
+    const formData = new FormData();
+
+    formData.append('name', task.name);
+
+    if(task.description){
+      formData.append('description', task.description);
+    }
+
+    if(task.dateToFinished){
+      formData.append('dateToFinished', formatDateFormData(task.dateToFinished));
+    }
+
+    if(task.userName){
+      formData.append('userName', task.userName);
+    }
+
+    return formData;
   }
 
 }
